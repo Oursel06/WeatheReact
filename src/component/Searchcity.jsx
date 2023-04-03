@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "../style/style.css";
+import { Link } from "react-router-dom";
 const data = require('../res/villes.json');
 
 const SearchCity = () => {
@@ -9,7 +11,9 @@ const SearchCity = () => {
     };
 
     const onSearch = (searchTerm) => {
+        <Link to='/meteocity' />
         setValue(searchTerm);
+        console.log(searchTerm);
     };
 
     return (
@@ -19,7 +23,10 @@ const SearchCity = () => {
             <div className="search-container">
                 <div className="search-inner">
                     <input type="text" value={value} onChange={onChange} />
-                    <button onClick={() => onSearch(value)}> Search </button>
+                    <Link to={"/meteocity/" + value}>
+                        <button onClick={() => onSearch(value)}> Search </button>
+                    </Link>
+
                 </div>
                 <div className="dropdown">
                     {data
@@ -44,7 +51,7 @@ const SearchCity = () => {
                         ))}
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
