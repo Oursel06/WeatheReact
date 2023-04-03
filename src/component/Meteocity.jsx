@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import "../style/style.css";
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 function Meteocity() {
 
     const { city } = useParams();
     const [citySelect, setCityItem] = useState([]);
-    const [promise, promiseok] = useState(true);
+    const [citySelectWeather, setCityWeatherItem] = useState([]);
+    const [citySelectMain, setCityMainItem] = useState([]);
+    const [citySelectWind, setCityWindItem] = useState([]);
 
     useEffect(() => {
-        async function fetchData() {
-            // " + props.name + "
+        function fetchData() {
             fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=159bc8edfd02cf9d326776ae9269e0c8&units=metric&lang=fr")
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        promiseok(false)
-                        setCityItem(result)
+                        setCityItem(result.name)
+                        setCityWeatherItem(result.weather[0]);
+                        setCityMainItem(result.main);
+                        setCityWindItem(result.wind);
                     }
                 )
         }
@@ -24,22 +29,20 @@ function Meteocity() {
 
     return (
         <div className="citycontent" >
-            {(!promise) ?
-                <div>
-                    <h2>Ville : {citySelect.name}</h2>
-                    <p>base : {citySelect.base}</p>
-                    <p>base : {citySelect.visibility}</p>
-                    {/* <i>Icon : {citySelect.weather[0].icon}</i> */}
-                    {/* <p>Description : {citySelect.weather[0].description}</p> */}
-                    {/* <p>Température : {citySelect.main.temp}°C</p> */}
-                    {/* <p>Préssion : {citySelect.main.pressure}hPa</p> */}
-                    {/* <p>Humidité : {citySelect.main.humidity}%</p> */}
-                    {/* <p>Vitesse vent : {citySelect.wind.speed}Km/h</p> */}
-                </div>
-                :
-                <p>Chargement...</p>
-            }
+            <div className='citymodal'>
+                <h2>Ville : {citySelect}</h2>
+                <i>Icon : {citySelectWeather.icon}</i>
+                <p>Description : {citySelectWeather.description}</p>
+                <p>Température : {citySelectMain.temp}°C</p>
+                <p>Préssion : {citySelectMain.pressure}hPa</p>
+                <p>Humidité : {citySelectMain.humidity}%</p>
+                <p>Vitesse vent : {citySelectWind.speed}Km/h</p>
+                <Link to="/searchcity">
+                    <li>Retour </li>
+                </Link>
+            </div>
         </div>
+
     );
 }
 

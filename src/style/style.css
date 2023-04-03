@@ -1,3 +1,10 @@
+.accueil {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background-color: gainsboro;
+}
+
 .search {
   background-color: gainsboro;
   font-family: sans-serif;
@@ -43,4 +50,19 @@ input {
 
 .search-inner {
   display: flex;
+}
+
+.citycontent {
+  width: auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.citymodal {
+  width: max-content;
+  background-color: gainsboro;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 20px;
 }

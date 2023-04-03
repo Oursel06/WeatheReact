@@ -24,7 +24,7 @@ const SearchCity = () => {
                 <div className="search-inner">
                     <input type="text" value={value} onChange={onChange} />
                     <Link to={"/meteocity/" + value}>
-                        <button onClick={() => onSearch(value)}> Search </button>
+                        <button onClick={() => onSearch(value)}> Chercher </button>
                     </Link>
 
                 </div>
@@ -51,6 +51,9 @@ const SearchCity = () => {
                         ))}
                 </div>
             </div>
+            <Link to="/">
+                <li>Retour </li>
+            </Link>
         </div >
     );
 };
