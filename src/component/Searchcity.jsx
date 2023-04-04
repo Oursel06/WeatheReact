@@ -13,7 +13,12 @@ const SearchCity = () => {
     const onSearch = (searchTerm) => {
         <Link to='/meteocity' />
         setValue(searchTerm);
-        console.log(searchTerm);
+        if (localStorage.getItem("citysearch") != null) {
+            localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchTerm);
+        }
+        else {
+            localStorage.setItem("citysearch", searchTerm);
+        }
     };
 
     return (
