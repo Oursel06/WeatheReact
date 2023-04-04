@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../style/style.css";
 import { Link } from "react-router-dom";
+import { Button, TextField } from "@mui/material";
 const data = require('../res/villes.json');
 
 const SearchCity = () => {
@@ -31,11 +32,10 @@ const SearchCity = () => {
 
             <div className="search-container">
                 <div className="search-inner">
-                    <input type="text" value={value} onChange={onChange} />
+                    <TextField size="small" variant="outlined" color="success" label="Chercher une ville" value={value} onChange={onChange} />
                     <Link to={"/meteocity/" + value}>
-                        <button onClick={() => onsubmit(value)}> Chercher </button>
+                        <Button variant="outlined" color="success" onClick={() => onsubmit(value)}> Chercher </Button>
                     </Link>
-
                 </div>
                 <div className="dropdown">
                     {data
