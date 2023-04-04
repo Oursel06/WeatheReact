@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "../style/style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 const data = require('../res/villes.json');
 
 const SearchCity = () => {
     const [value, setValue] = useState("");
+    const navigate = useNavigate();
 
     const onChange = (event) => {
         setValue(event.target.value);
@@ -16,12 +17,16 @@ const SearchCity = () => {
     };
 
     const onsubmit = (searchTerm) => {
-        setValue(searchTerm.toLowerCase());
-        if (localStorage.getItem("citysearch") != null) {
-            localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchTerm.toLowerCase());
-        }
-        else {
-            localStorage.setItem("citysearch", searchTerm.toLowerCase());
+        if (searchTerm.length > 0) {
+            console.log(searchTerm.length)
+            setValue(searchTerm.toLowerCase());
+            if (localStorage.getItem("citysearch") != null) {
+                localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchTerm.toLowerCase());
+            }
+            else {
+                localStorage.setItem("citysearch", searchTerm.toLowerCase());
+            }
+            navigate("/meteocity/" + searchTerm);
         }
     };
 
@@ -29,13 +34,10 @@ const SearchCity = () => {
         <div className="search">
             <h1>Voir la météo d'une ville</h1>
             <p>(L'autocompletion est disponible uniquement pour les villes de France)</p>
-
             <div className="search-container">
                 <div className="search-inner">
                     <TextField size="small" variant="outlined" color="success" label="Chercher une ville" value={value} onChange={onChange} />
-                    <Link to={"/meteocity/" + value}>
-                        <Button variant="outlined" color="success" onClick={() => onsubmit(value)}> Chercher </Button>
-                    </Link>
+                    <Button variant="outlined" color="success" onClick={() => onsubmit(value)}> Chercher </Button>
                 </div>
                 <div className="dropdown">
                     {data

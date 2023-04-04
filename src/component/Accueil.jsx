@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const Accueil = () => {
 
     const localStorageValue = localStorage.getItem("citysearch");
-    var localStorageValueArr = (localStorageValue != null) ? localStorageValue.split(", ") : "";
-    var localStorageValueArrUnique = (localStorageValueArr != "") ? localStorageValueArr.filter((x, i) => localStorageValueArr.indexOf(x) === i) : "";
-    var cityHistoryArrays = [];
+    const localStorageValueArr = (localStorageValue != null) ? localStorageValue.split(", ") : "";
+    const localStorageValueArrUnique = (localStorageValueArr !== "") ? localStorageValueArr.filter((x, i) => localStorageValueArr.indexOf(x) === i) : "";
+    const cityHistoryArrays = [];
 
     if (localStorage.getItem("citysearch") != null) {
         localStorageValueArrUnique.forEach((citySearchItem) => {
