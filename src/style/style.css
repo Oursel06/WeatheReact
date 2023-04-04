@@ -66,3 +66,8 @@ input {
   margin-top: 5px;
   padding: 20px;
 }
+
+.warning {
+  font-size: 12px;
+  margin: 5px;
+}

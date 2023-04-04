@@ -4,10 +4,11 @@ const Accueil = () => {
 
     const localStorageValue = localStorage.getItem("citysearch");
     var localStorageValueArr = (localStorageValue != null) ? localStorageValue.split(", ") : "";
+    var localStorageValueArrUnique = (localStorageValueArr != "") ? localStorageValueArr.filter((x, i) => localStorageValueArr.indexOf(x) === i) : "";
     var cityHistoryArrays = [];
 
     if (localStorage.getItem("citysearch") != null) {
-        localStorageValueArr.forEach((citySearchItem) => {
+        localStorageValueArrUnique.forEach((citySearchItem) => {
             cityHistoryArrays.push(
                 <Link to={"/meteocity/" + citySearchItem}>
                     <li> {citySearchItem} </li>

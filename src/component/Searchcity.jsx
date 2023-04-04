@@ -15,18 +15,19 @@ const SearchCity = () => {
     };
 
     const onsubmit = (searchTerm) => {
-        setValue(searchTerm);
+        setValue(searchTerm.toLowerCase());
         if (localStorage.getItem("citysearch") != null) {
-            localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchTerm);
+            localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchTerm.toLowerCase());
         }
         else {
-            localStorage.setItem("citysearch", searchTerm);
+            localStorage.setItem("citysearch", searchTerm.toLowerCase());
         }
     };
 
     return (
         <div className="search">
-            <h1>Voir la météo d'une ville de France</h1>
+            <h1>Voir la météo d'une ville</h1>
+            <p>(L'autocompletion est disponible uniquement pour les villes de France)</p>
 
             <div className="search-container">
                 <div className="search-inner">
@@ -59,6 +60,8 @@ const SearchCity = () => {
                         ))}
                 </div>
             </div>
+            <i className="warning">ATTENTION : Certaines données peuvent être inexactes</i>
+
             <Link to="/">
                 <li>Retour </li>
             </Link>
