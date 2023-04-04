@@ -3,23 +3,37 @@ import { Link } from "react-router-dom";
 const Accueil = () => {
 
     const localStorageValue = localStorage.getItem("citysearch");
+    var localStorageValueArr = localStorageValue.split(", ");
+    var cityHistoryArrays = [];
+
+    if (localStorage.getItem("citysearch") != null) {
+        localStorageValueArr.forEach((citySearchItem) => {
+            cityHistoryArrays.push(
+                <Link to={"/meteocity/" + citySearchItem}>
+                    <li> {citySearchItem} </li>
+                </Link>
+            )
+        })
+    }
 
     return (
         <div className="accueil">
             <h2>Bienvenue sur WeatheReact !</h2>
             <i>L'application météo à amener partout avec vous !</i>
-            {(localStorageValue != null) ?
+
+            {(localStorageValueArr.length > 0) ?
                 <div>
                     <p>Votre dernière recherche :</p>
-                    <Link to={"/meteocity/" + localStorage.getItem("citysearch")}>
-                        <li> {localStorage.getItem("citysearch")} </li>
-                    </Link>
+                    {cityHistoryArrays}
                 </div>
                 :
-                <div></div>
+                <div>Historique vide vous pouvez voir la météo d'une ville en France en <Link to="/searchcity/">
+                    <li>cliquant ici </li>
+                </Link>
+                </div>
             }
             <Link to="/searchcity/">
-                <li>Faire une recherche </li>
+                <li> Chercher une ville </li>
             </Link>
         </div>
     );

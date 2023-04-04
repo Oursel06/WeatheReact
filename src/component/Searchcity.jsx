@@ -23,7 +23,7 @@ const SearchCity = () => {
 
     return (
         <div className="search">
-            <h1>Recherchez une ville de France</h1>
+            <h1>Voir la météo d'une ville de France</h1>
 
             <div className="search-container">
                 <div className="search-inner">
