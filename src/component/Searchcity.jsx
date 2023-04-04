@@ -11,7 +11,10 @@ const SearchCity = () => {
     };
 
     const onSearch = (searchTerm) => {
-        <Link to='/meteocity' />
+        setValue(searchTerm);
+    };
+
+    const onsubmit = (searchTerm) => {
         setValue(searchTerm);
         if (localStorage.getItem("citysearch") != null) {
             localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchTerm);
@@ -29,7 +32,7 @@ const SearchCity = () => {
                 <div className="search-inner">
                     <input type="text" value={value} onChange={onChange} />
                     <Link to={"/meteocity/" + value}>
-                        <button onClick={() => onSearch(value)}> Chercher </button>
+                        <button onClick={() => onsubmit(value)}> Chercher </button>
                     </Link>
 
                 </div>

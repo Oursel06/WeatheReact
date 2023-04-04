@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Accueil = () => {
 
     const localStorageValue = localStorage.getItem("citysearch");
-    var localStorageValueArr = localStorageValue.split(", ");
+    var localStorageValueArr = (localStorageValue != null) ? localStorageValue.split(", ") : "";
     var cityHistoryArrays = [];
 
     if (localStorage.getItem("citysearch") != null) {
@@ -23,19 +23,21 @@ const Accueil = () => {
 
             {(localStorageValueArr.length > 0) ?
                 <div>
-                    <p>Votre dernière recherche :</p>
-                    {cityHistoryArrays}
+                    <p>Historique :
+                        {cityHistoryArrays} </p>
+                    <p>
+                        <Link to="/searchcity/">
+                            <li> Chercher une ville </li>
+                        </Link>
+                    </p>
                 </div>
                 :
-                <div>Historique vide vous pouvez voir la météo d'une ville en France en <Link to="/searchcity/">
+                <p>Historique vide ! vous pouvez voir la météo d'une ville en France en <Link to="/searchcity/">
                     <li>cliquant ici </li>
                 </Link>
-                </div>
+                </p>
             }
-            <Link to="/searchcity/">
-                <li> Chercher une ville </li>
-            </Link>
-        </div>
+        </div >
     );
 };
 
