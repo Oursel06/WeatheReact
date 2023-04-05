@@ -3,6 +3,7 @@ import "../style/style.css";
 import { Link } from "react-router-dom";
 const data = require('../res/villes.json');
 
+
 const SearchCity = () => {
     const [value, setValue] = useState("");
 
@@ -33,7 +34,7 @@ const SearchCity = () => {
                 <div className="search-inner">
                     <input type="text" value={value} onChange={onChange} />
                     <Link to={"/meteocity/" + value}>
-                        <button onClick={() => onsubmit(value)}> Chercher </button>
+                        <button sx={{bgcolor:'background.paper'}} onClick={() => onsubmit(value)}> Chercher </button>
                     </Link>
 
                 </div>
