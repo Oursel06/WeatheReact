@@ -18,6 +18,8 @@ function Meteocity() {
     const [citySelectMain, setCityMainItem] = useState([]);
     const [citySelectWind, setCityWindItem] = useState([]);
 
+    /* Fonction exécutée pour récupérer les données de l'API openweathermap
+    On stock les données dans différents tableaux pour les traiter dans le return() */
     useEffect(() => {
         function fetchData() {
             fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=159bc8edfd02cf9d326776ae9269e0c8&units=metric&lang=fr")
