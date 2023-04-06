@@ -1,4 +1,11 @@
-.accueil {
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 ;
+  background-color:#3cdfff;
+  overflow: hidden;
+}
+/* .accueil {
   width: 100%;
   height: 100vh;
   text-align: center;
@@ -70,4 +77,4 @@ input {
 .warning {
   font-size: 12px;
   margin: 5px;
-}
+} */

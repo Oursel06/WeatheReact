@@ -2,7 +2,9 @@ import { useState } from "react";
 import "../style/style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
+import { Box } from '@mui/system';
 const data = require('../res/villes.json');
+
 
 const SearchCity = () => {
 
@@ -38,15 +40,60 @@ const SearchCity = () => {
     };
 
     return (
-        <div className="search">
-            <h1>Voir la météo d'une ville</h1>
-            <p>(L'autocompletion est disponible uniquement pour les villes de France)</p>
+        <Box sx={{
+            width: '100%',
+            height: '90vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+        }}>
+            <Box sx={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                "& h1": { color: 'white' },
+                "& p": { margin: '0', fontStyle: 'italic' }
+            }}>
+                <h1>Voir la météo d'une ville</h1>
+                <p>(L'autocompletion est disponible uniquement pour les villes de France)</p>
+            </Box>
             <div className="search-container">
-                <div className="search-inner">
-                    <TextField size="small" variant="outlined" color="success" label="Chercher une ville" value={value} onChange={onChange} />
-                    <Button variant="outlined" color="success" onClick={() => onsubmit(value)}> Chercher </Button>
-                </div>
-                <div className="dropdown">
+                <Box >
+                    <TextField sx={{
+                        width: '50vw',
+                        backgroundColor: 'white',
+                        borderRadius: '10px',
+                        border: 'none',
+                        "& label": { color: 'black', backgroundColor: 'white' },
+                        "& fieldset legend > span": { padding: '0' }
+                    }} color="secondary" variant="outlined" label="Chercher une ville" value={value} onChange={onChange} />
+                    <Button sx={{
+                        backgroundColor: 'purple',
+                        boxSizing: 'border-box',
+                        borderRadius: '10px',
+                        color: 'white',
+                        fontSize: '1rem',
+                        boxShadow: '5px 5px 0px white',
+                        textTransform: 'capitalize',
+                        border: 'none',
+                        transform: 'translateY(3px)',
+                        ":hover": {
+                            backgroundColor: 'white',
+                            boxSizing: 'border-box',
+                            borderRadius: '10px',
+                            boxShadow: '5px 5px 0px purple',
+                            textTransform: 'capitalize',
+                            border: 'none',
+                            color: 'purple'
+                        }
+                    }} variant="outlined" size="large" onClick={() => onsubmit(value)}> Chercher </Button>
+                </Box>
+                <Box sx={{
+                    padding: 2
+                }}>
                     {/* Filtrage des données dans data avec les caractères de l'input */}
                     {data
                         .filter((item) => {
@@ -68,14 +115,39 @@ const SearchCity = () => {
                                 {item.nom_ville}
                             </div>
                         ))}
-                </div>
+                </Box>
             </div>
-            <i className="warning">ATTENTION : Certaines données peuvent être inexactes</i>
-
-            <Link to="/">
-                <li>Retour </li>
-            </Link>
-        </div >
+            <Box sx={{ color: 'red', fontSize: '1.5rem', display: 'flex', textAlign: 'center' }}>
+                <i>ATTENTION : Certaines données peuvent être inexactes</i>
+            </Box>
+            <Box sx={{
+                "& li": {
+                    height: '10vh',
+                    boxSizing: 'border-box',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: '10px',
+                    backgroundColor: 'purple',
+                    color: 'white',
+                    fontSize: '1.5rem',
+                    boxShadow: '5px 5px 0px white',
+                    width: '75vw',
+                    ":hover": {
+                        backgroundColor: 'white',
+                        boxSizing: 'border-box',
+                        borderRadius: '10px',
+                        boxShadow: '5px 5px 0px purple',
+                        border: 'none',
+                        color: 'purple'
+                    }
+                },
+            }}>
+                <Link to="/">
+                    <li>Retour </li>
+                </Link>
+            </Box>
+        </Box >
     );
 };
 

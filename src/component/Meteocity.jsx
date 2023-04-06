@@ -9,6 +9,7 @@ import neige from '../res/neige.png';
 import couvert from '../res/couvert.png';
 import brouillard from '../res/brouillard.png';
 import loadimg from '../res/loadimg.png';
+import { Box } from '@mui/system';
 
 function Meteocity() {
 
@@ -37,9 +38,56 @@ function Meteocity() {
     })
 
     return (
-        <div className="citycontent" >
-            <div className='citymodal'>
-                <h2>Ville : {citySelect}</h2>
+        <Box sx={{
+            width: '100%',
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            "& li": {
+                height: '10vh',
+                boxSizing: 'border-box',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: '10px',
+                backgroundColor: 'purple',
+                color: 'white',
+                fontSize: '1.5rem',
+                boxShadow: '5px 5px 0px white',
+                width: '75vw',
+                ":hover": {
+                    backgroundColor: 'white',
+                    boxSizing: 'border-box',
+                    borderRadius: '10px',
+                    boxShadow: '5px 5px 0px purple',
+                    border: 'none',
+                    color: 'purple'
+                }
+            },
+        }}>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+                padding: 2,
+                borderRadius: '10px',
+                backgroundColor: 'white',
+                boxShadow: '5px 5px 0px purple',
+                width: '75vw',
+                height: '60vh',
+                "& h1": { color: 'Purple' },
+                "& p": {
+                    width: '70%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontSize: '1.2rem',
+                },
+                "& p span": { fontWeight: 'bold' }
+            }}>
+                <h1>Ville : {citySelect}</h1>
                 {(citySelectWeather.icon === "01n") ?
                     <div>
                         <img width="100px" height="100px" src={soleil} alt='soleil' />
@@ -88,16 +136,16 @@ function Meteocity() {
                                                             <img width="100px" height="100px" src={loadimg} alt='chargement' />
                 }
 
-                <p>Description : {citySelectWeather.description}</p>
-                <p>Température : {citySelectMain.temp}°C</p>
-                <p>Préssion : {citySelectMain.pressure}hPa</p>
-                <p>Humidité : {citySelectMain.humidity}%</p>
-                <p>Vitesse vent : {citySelectWind.speed}Km/h</p>
-                <Link to="/searchcity">
-                    <li>Retour </li>
-                </Link>
-            </div>
-        </div>
+                <p>Description : <span>{citySelectWeather.description}</span></p>
+                <p>Température : <span>{citySelectMain.temp}°C</span></p>
+                <p>Préssion : <span>{citySelectMain.pressure}hPa</span></p>
+                <p>Humidité : <span>{citySelectMain.humidity}%</span></p>
+                <p>Vitesse vent : <span>{citySelectWind.speed}Km/h</span></p>
+            </Box>
+            <Link to="/">
+                <li>Retour </li>
+            </Link>
+        </Box>
 
     );
 }
