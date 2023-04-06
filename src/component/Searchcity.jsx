@@ -1,27 +1,40 @@
 import { useState } from "react";
 import "../style/style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, TextField } from "@mui/material";
 const data = require('../res/villes.json');
 
 
 const SearchCity = () => {
-    const [value, setValue] = useState("");
 
+    const [value, setValue] = useState("");
+    const navigate = useNavigate();
+
+    //Fonction exécutée quand la valeur de l'input change
     const onChange = (event) => {
         setValue(event.target.value);
     };
 
-    const onSearch = (searchTerm) => {
-        setValue(searchTerm);
+    /* Fonction exécutée quand l'utilisateur clique sur un item de la liste déroulante
+    la valeur sélectionnée est insérée dans l'input */
+    const onSearch = (searchCityItem) => {
+        setValue(searchCityItem);
     };
 
-    const onsubmit = (searchTerm) => {
-        setValue(searchTerm.toLowerCase());
-        if (localStorage.getItem("citysearch") != null) {
-            localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchTerm.toLowerCase());
-        }
-        else {
-            localStorage.setItem("citysearch", searchTerm.toLowerCase());
+    /* Fonction exécutée quand l'utilisateur clique sur "chercher"
+    On vérifie que l'input est rempli, on setValue la ville choisie (searchCityItem) par l'utilisateur
+    et on navigue vers Meteocity avec le nom de la ville dans l'URL.
+    Si le localstorage n'est pas vide (au moins une recherche) on l'incrémente avec la nouvelle ville choisie */
+    const onsubmit = (searchCityItem) => {
+        if (searchCityItem.length > 0) {
+            setValue(searchCityItem.toLowerCase());
+            if (localStorage.getItem("citysearch") != null) {
+                localStorage.setItem("citysearch", localStorage.getItem("citysearch") + ", " + searchCityItem.toLowerCase());
+            }
+            else {
+                localStorage.setItem("citysearch", searchCityItem.toLowerCase());
+            }
+            navigate("/meteocity/" + searchCityItem);
         }
     };
 
@@ -29,25 +42,22 @@ const SearchCity = () => {
         <div className="search">
             <h1>Voir la météo d'une ville</h1>
             <p>(L'autocompletion est disponible uniquement pour les villes de France)</p>
-
             <div className="search-container">
                 <div className="search-inner">
-                    <input type="text" value={value} onChange={onChange} />
-                    <Link to={"/meteocity/" + value}>
-                        <button sx={{bgcolor:'background.paper'}} onClick={() => onsubmit(value)}> Chercher </button>
-                    </Link>
-
+                    <TextField size="small" variant="outlined" color="success" label="Chercher une ville" value={value} onChange={onChange} />
+                    <Button variant="outlined" color="success" onClick={() => onsubmit(value)}> Chercher </Button>
                 </div>
                 <div className="dropdown">
+                    {/* Filtrage des données dans data avec les caractères de l'input */}
                     {data
                         .filter((item) => {
-                            const searchTerm = value.toLowerCase();
+                            const searchCityItem = value.toLowerCase();
                             const fullName = item.nom_ville.toLowerCase();
 
                             return (
-                                searchTerm &&
-                                fullName.startsWith(searchTerm) &&
-                                fullName !== searchTerm
+                                searchCityItem &&
+                                fullName.startsWith(searchCityItem) &&
+                                fullName !== searchCityItem
                             );
                         })
                         .slice(0, 10)
