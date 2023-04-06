@@ -20,10 +20,14 @@ function Meteocity() {
     const [citySelectWind, setCityWindItem] = useState([]);
 
     /* Fonction exécutée pour récupérer les données de l'API openweathermap
-    On stock les données dans différents tableaux pour les traiter dans le return() */
+    On stock les données dans différents tableaux pour les traiter dans le return() 
+    CLE DISPO :
+    ede1a0b17ea5ca8340e4b2a6e1cd5d77
+    159bc8edfd02cf9d326776ae9269e0c8
+    9300ddf4df026452021424b6a329efc0 */
     useEffect(() => {
         function fetchData() {
-            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=159bc8edfd02cf9d326776ae9269e0c8&units=metric&lang=fr")
+            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=9300ddf4df026452021424b6a329efc0&units=metric&lang=fr")
                 .then(res => res.json())
                 .then(
                     (result) => {
