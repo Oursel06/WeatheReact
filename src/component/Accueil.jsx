@@ -147,7 +147,7 @@ const Accueil = () => {
                                 }
                             },
                         }}>
-                            <p>Historique vide ! vous pouvez voir la météo d'une ville en France en <Link to="/searchcity/">
+                            <p>Historique vide ! vous pouvez voir la météo d'une ville en <Link to="/searchcity/">
                                 <li>cliquant ici </li>
                             </Link>
                             </p>
