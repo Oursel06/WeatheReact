@@ -1,7 +1,9 @@
-html {
+html, body {
   width: 100vw;
   height: 100vh;
   margin: 0 ;
+  background-color:#3cdfff;
+  overflow: hidden;
 }
 /* .accueil {
   width: 100%;
